@@ -11,7 +11,7 @@ steps:
 - script: |
     dotnet restore
     dotnet build --configuration $(buildConfiguration)
-    dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
+    dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx --collect "Code Coverage"
     dotnet publish --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
 
 - task: PublishTestResults@2
