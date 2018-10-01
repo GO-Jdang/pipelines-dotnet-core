@@ -17,7 +17,7 @@ steps:
     docker login -u $(dockerId) -p $pswd $(dockerid).azurecr.io
     docker push $(dockerId).azurecr.io/$(imageName)
   env:
-    pswd: $(Password)
+    pswd: $(acrPassword)
 
 - task: PublishTestResults@2
   inputs:
