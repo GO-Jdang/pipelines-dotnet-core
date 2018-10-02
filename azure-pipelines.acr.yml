@@ -11,13 +11,11 @@ variables:
 steps:
 - script: |
     ls -la
-    echo 'These are on '
-    pwd
     dotnet build --configuration $(buildConfiguration)
     dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
     dotnet publish --configuration $(buildConfiguration) --output out
     docker build -f Dockerfile -t $(acrName).azurecr.io/$(imageName) .
-    docker login -u 2fb3489d-c2dd-425e-b739-4d7a43f26fb2 -p 5e320b1f-10ec-4795-b294-7f6a4e895e00 $(acrName).azurecr.io
+    cat ~/azcr.txt | docker login -u 2fb3489d-c2dd-425e-b739-4d7a43f26fb2 --password-stdin $(acrName).azurecr.io
     docker push $(acrName).azurecr.io/$(imageName)
   env:
     pswd: $(aspPw)
